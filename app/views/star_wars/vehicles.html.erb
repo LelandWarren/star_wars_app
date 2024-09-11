@@ -1,2 +1,22 @@
-<h1>StarWars#vehicles</h1>
-<p>Find me in app/views/star_wars/vehicles.html.erb</p>
+<h1>Star Wars Vehicles</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Manufacturer</th>
+      <th>Crew Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vehicles.each do |vehicle| %>
+      <tr data-turbo-action="replace" data-controller="vehicle" data-action="click->vehicle#showDetails" data-url="<%= vehicle["url"] %>">
+        <td><%= vehicle["name"] %></td>
+        <td><%= vehicle["manufacturer"] %></td>
+        <td><%= vehicle["crew"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Details container -->
+<div id="details-view"></div>

@@ -1,6 +1,7 @@
 <h1>Star Wars Films</h1>
-<turbo-frame id="films">
-    <table data-controller="film">
+
+<turbo-frame id="films-frame">
+    <table>
     <thead>
         <tr>
         <th>Title</th>
@@ -10,7 +11,7 @@
     </thead>
     <tbody>
         <% @films.each do |film| %>
-        <tr>
+        <tr data-turbo-action="replace" data-controller="film" data-action="click->film#showDetails" data-url="<%= film["url"] %>">
             <td><%= film["title"] %></td>
             <td><%= film["director"] %></td>
             <td><%= film["release_date"] %></td>
@@ -19,3 +20,6 @@
     </tbody>
     </table>
 </turbo-frame>
+
+<!-- Details container -->
+<div id="details-view"></div>
