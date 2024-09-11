@@ -1,0 +1,21 @@
+<h1>Star Wars Films</h1>
+<turbo-frame id="films">
+    <table data-controller="film">
+    <thead>
+        <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @films.each do |film| %>
+        <tr>
+            <td><%= film["title"] %></td>
+            <td><%= film["director"] %></td>
+            <td><%= film["release_date"] %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+</turbo-frame>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root "star_wars#films"
+  get "/films", to: "star_wars#films"
+  get "/people", to: "star_wars#people"
+  get "/vehicles", to: "star_wars#vehicles"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
