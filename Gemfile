@@ -56,3 +56,5 @@ gem "hotwire-rails"
 gem 'importmap-rails'
 
 gem "httparty"
+
+gem 'tailwindcss-rails'
