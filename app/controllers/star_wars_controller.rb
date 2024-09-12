@@ -5,12 +5,26 @@ class StarWarsController < ApplicationController
 
 
   def films
-    @films = self.class.get('/films').parsed_response["results"]
+    @films = Rails.cache.fetch("all_films", expires_in: 12.hours) do
+      self.class.get("/films").parsed_response["results"]
+    end
   end
   
   def show_film
     film_id = params[:id]
-    @film = self.class.get("/films/#{film_id}").parsed_response
+    cache_key = "film_#{film_id}"
+
+    if Rails.cache.exist?(cache_key)
+      logger.info "Cache hit for #{cache_key}"
+    else
+      logger.info "Cache miss for #{cache_key}"
+    end
+
+    # Fetch the film data, either from cache or the API
+    @film = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+      logger.info "Fetching data from API for film #{film_id}"
+      self.class.get("/films/#{film_id}").parsed_response
+    end
 
     # Render the full page for the film details
     render "star_wars/show_film"
