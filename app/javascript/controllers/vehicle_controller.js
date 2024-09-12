@@ -14,17 +14,4 @@ export default class extends Controller {
       });
   }
 
-  displayDetails(vehicle) {
-    const detailsContainer = document.getElementById("details-view");
-
-    detailsContainer.innerHTML = `
-      <h2>${vehicle.name}</h2>
-      <p><strong>Model:</strong> ${vehicle.model}</p>
-      <p><strong>Manufacturer:</strong> ${vehicle.manufacturer}</p>
-      <p><strong>Crew:</strong> ${vehicle.crew}</p>
-      <p><strong>Passengers:</strong> ${vehicle.passengers}</p>
-    `;
-
-    document.body.appendChild(detailsContainer);
-  }
 }

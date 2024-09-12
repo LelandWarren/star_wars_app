@@ -1,28 +1,13 @@
-<h1 class="text-3xl font-bold mb-6 text-center">Star Wars Films</h1>
+<h1>Star Wars Films</h1>
 
 <turbo-frame id="films-frame">
-  <table class="table-auto border-collapse w-full bg-white shadow-md rounded-lg">
-    <thead class="bg-gray-100">
-      <tr>
-        <th>Title</th>
-        <th>Director</th>
-        <th>Release Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @films.each do |film| %>
-        <tr>
-          <td><%= link_to film["title"], film_path(film["url"].split('/').last), data: { turbo_frame: "films-frame" } %></td>
-          <td><%= film["director"] %></td>
-          <td><%= film["release_date"] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="items-container">
+    <% @films.each do |film| %>
+      <div class="item-card">
+        <h2><%= link_to film["title"], film_path(film["url"].split('/').last), data: { show_spinner: true, turbo: "false" } %></h2>
+        <p><strong>Director:</strong> <%= film["director"] %></p>
+        <p><strong>Release Date:</strong> <%= film["release_date"] %></p>
+      </div>
+    <% end %>
+  </div>
 </turbo-frame>
-
-
-
-
-<!-- Details container -->
-<div id="details-view"></div>

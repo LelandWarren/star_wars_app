@@ -11,9 +11,12 @@ class StarWarsController < ApplicationController
   def show_film
     film_id = params[:id]
     @film = self.class.get("/films/#{film_id}").parsed_response
-  
-    render partial: "star_wars/film_details", locals: { film: @film }, formats: [:html]
+
+    # Render the full page for the film details
+    render "star_wars/show_film"
   end
+  
+  
   
 
   def people
@@ -23,7 +26,8 @@ class StarWarsController < ApplicationController
   def show_person
     person_id = params[:id]
     @person = self.class.get("/people/#{person_id}").parsed_response
-    render partial: "person_details", locals: { person: @person }
+  
+    render "star_wars/show_person"
   end
 
   def vehicles
@@ -33,7 +37,9 @@ class StarWarsController < ApplicationController
   def show_vehicle
     vehicle_id = params[:id]
     @vehicle = self.class.get("/vehicles/#{vehicle_id}").parsed_response
-    render partial: "vehicle_details", locals: { vehicle: @vehicle }
+
+    render "star_wars/show_vehicle"
   end
+
   
 end

@@ -1,22 +1,14 @@
 <h1>Star Wars Vehicles</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Manufacturer</th>
-      <th>Crew Size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @vehicles.each do |vehicle| %>
-      <tr data-turbo-action="replace" data-controller="vehicle" data-action="click->vehicle#showDetails" data-url="<%= vehicle["url"] %>">
-        <td><%= vehicle["name"] %></td>
-        <td><%= vehicle["manufacturer"] %></td>
-        <td><%= vehicle["crew"] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<!-- Details container -->
-<div id="details-view"></div>
+<turbo-frame id="vehicles-frame">
+  <div class="items-container">
+    <% @vehicles.each do |vehicle| %>
+      <div class="item-card">
+        <h2><%= link_to vehicle["name"], vehicle_path(vehicle["url"].split('/').last), data: { show_spinner: true, turbo: "false" } %></h2>
+        <p><strong>Model:</strong> <%= vehicle["model"] %></p>
+        <p><strong>Manufacturer:</strong> <%= vehicle["manufacturer"] %></p>
+        <p><strong>Passengers:</strong> <%= vehicle["passengers"] %></p>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>

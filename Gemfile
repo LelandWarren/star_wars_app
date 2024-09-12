@@ -57,4 +57,4 @@ gem 'importmap-rails'
 
 gem "httparty"
 
-gem 'tailwindcss-rails'
+# gem 'tailwindcss-rails'

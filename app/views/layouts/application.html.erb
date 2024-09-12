@@ -6,29 +6,30 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_importmap_tags %> 
   </head>
 
-  <body class="bg-gray-100">
-    <!-- Navigation Bar -->
+  <body class="bg-gray-100 font-sans leading-relaxed text-gray-900">
     <nav class="bg-gray-800 p-4">
       <div class="container mx-auto flex justify-between items-center">
-        <!-- Logo -->
-        <div class="text-white font-bold text-xl">
-          <%= link_to "Star Wars Universe", root_path, class: "hover:text-gray-400" %>
+        <div class="text-white font-bold text-2xl tracking-wide">
+          <%= link_to "Star Wars Universe", root_path, class: "hover:text-yellow-300" %>
         </div>
-
-        <!-- Links -->
-        <div class="space-x-4">
-          <%= link_to "Films", films_path, class: "text-white hover:text-gray-400" %>
-          <%= link_to "People", people_path, class: "text-white hover:text-gray-400" %>
-          <%= link_to "Vehicles", vehicles_path, class: "text-white hover:text-gray-400" %>
+        <div class="space-x-6">
+          <%= link_to "Films", films_path, class: request.path.start_with?(films_path) ? "active" : "", data: { show_spinner: true }  %>
+          <%= link_to "People", people_path, class: request.path.start_with?(people_path) ? "active" : "", data: { show_spinner: true } %>
+          <%= link_to "Vehicles", vehicles_path, class: request.path.start_with?(vehicles_path) ? "active" : "", data: { show_spinner: true } %>
         </div>
       </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container mx-auto p-8">
+
+    <!-- Full-screen loading modal -->
+    <div id="loading-modal" class="loading-modal">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
       <%= yield %>
     </div>
   </body>

@@ -1,22 +1,14 @@
-<h1>Star Wars People</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Gender</th>
-      <th>Birth Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @people.each do |person| %>
-      <tr data-turbo-action="replace" data-controller="person" data-action="click->person#showDetails" data-url="<%= person["url"] %>">
-        <td><%= person["name"] %></td>
-        <td><%= person["gender"] %></td>
-        <td><%= person["birth_year"] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>Star Wars Characters</h1>
 
-<!-- Details container -->
-<div id="details-view"></div>
+<turbo-frame id="people-frame">
+  <div class="items-container">
+    <% @people.each do |person| %>
+      <div class="item-card">
+        <h2><%= link_to person["name"], person_path(person["url"].split('/').last), data: { show_spinner: true, turbo: "false" } %></h2>
+        <p><strong>Gender:</strong> <%= person["gender"] %></p>
+        <p><strong>Birth Year:</strong> <%= person["birth_year"] %></p>
+        <p><strong>Height:</strong> <%= person["height"] %> cm</p>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>
