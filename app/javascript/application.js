@@ -12,17 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
       link.addEventListener('click', function() {
         const modal = document.getElementById("loading-modal");
         if (modal) {
-          modal.style.display = "flex";  // Show the modal spinner
+          console.log("Show the spinner!");
+          modal.style.display = "flex";  // Show the modal spinnera
         }
       });
     });
   });
   
-  // Hide the spinner when the page loads
-  window.addEventListener('load', function() {
-    const modal = document.getElementById("loading-modal");
-    if (modal) {
-      modal.style.display = "none";  // Hide the modal spinner when the page is fully loaded
+
+  ["popstate", "turbo:load", "hashchange", "unload", "pagehide", "pageshow"].forEach(function(eventName) {
+      window.addEventListener(eventName, function() {
+        const modal = document.getElementById("loading-modal");
+        console.log("event: " + eventName); 
+        if (modal) {
+          modal.style.display = "none";  // Hide the modal spinner when the page is fully loaded
+        }
+      });
     }
-  });
+  );
   

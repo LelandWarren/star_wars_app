@@ -1,12 +1,7 @@
 class StarWarsController < ApplicationController
-
-  include HTTParty
-  base_uri 'https://swapi.dev/api/'
-
-
   def films
     @films = Rails.cache.fetch("all_films", expires_in: 12.hours) do
-      self.class.get("/films").parsed_response["results"]
+      StarWarsApiService.get_films
     end
   end
   
@@ -23,37 +18,35 @@ class StarWarsController < ApplicationController
     # Fetch the film data, either from cache or the API
     @film = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
       logger.info "Fetching data from API for film #{film_id}"
-      self.class.get("/films/#{film_id}").parsed_response
+      StarWarsApiService.get_film(film_id)
     end
 
-    # Render the full page for the film details
     render "star_wars/show_film"
   end
   
-  
-  
-
   def people
-    @people = self.class.get('/people').parsed_response["results"]
+    @people = Rails.cache.fetch("all_people", expires_in: 12.hours) do
+      StarWarsApiService.get_people
+    end
   end
 
   def show_person
     person_id = params[:id]
-    @person = self.class.get("/people/#{person_id}").parsed_response
-  
+    @person = StarWarsApiService.get_person(person_id)
+
     render "star_wars/show_person"
   end
 
   def vehicles
-    @vehicles = self.class.get('/vehicles').parsed_response["results"]
+    @vehicles = Rails.cache.fetch("all_vehicles", expires_in: 12.hours) do
+      StarWarsApiService.get_vehicles
+    end
   end
 
   def show_vehicle
     vehicle_id = params[:id]
-    @vehicle = self.class.get("/vehicles/#{vehicle_id}").parsed_response
+    @vehicle = StarWarsApiService.get_vehicle(vehicle_id)
 
     render "star_wars/show_vehicle"
   end
-
-  
 end
