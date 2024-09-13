@@ -109,12 +109,6 @@ rails server
 
 Visit `http://localhost:3000` in your browser to view the application.
 
-### 6. Running Tests (Optional)
-
-If there are tests in the project, you can run them with:
-
-```
-bundle exec rspec
 ```
 
 ---
