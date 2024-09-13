@@ -4,7 +4,20 @@
   <h2><%= @vehicle["name"] %></h2>
   <p><strong>Model:</strong> <%= @vehicle["model"] %></p>
   <p><strong>Manufacturer:</strong> <%= @vehicle["manufacturer"] %></p>
-  <p><strong>Crew:</strong> <%= @vehicle["crew"] %></p>
-  <p><strong>Passengers:</strong> <%= @vehicle["passengers"] %></p>
-  <p><strong>Cost:</strong> <%= @vehicle["cost_in_credits"] %> credits</p>
+
+  <h3>Pilots</h3>
+  <ul>
+    <% @pilots.each do |pilot| %>
+      <% pilot_id = pilot["url"].split("/").last %>
+      <li><%= link_to pilot["name"], person_path(pilot_id), data: { show_spinner: true, turbo: "false"  } %></li>
+    <% end %>
+  </ul>
+
+  <h3>Films</h3>
+  <ul>
+    <% @films.each do |film| %>
+      <% film_id = film["url"].split("/").last %>
+      <li><%= link_to film["title"], film_path(film_id), data: { show_spinner: true, turbo: "false"  } %></li>
+    <% end %>
+  </ul>
 </div>

@@ -1,9 +1,14 @@
-<h1>Character Details</h1>
+<h1>Person Details</h1>
 
 <div class="detail-container">
   <h2><%= @person["name"] %></h2>
   <p><strong>Gender:</strong> <%= @person["gender"] %></p>
-  <p><strong>Birth Year:</strong> <%= @person["birth_year"] %></p>
-  <p><strong>Height:</strong> <%= @person["height"] %> cm</p>
-  <p><strong>Mass:</strong> <%= @person["mass"] %> kg</p>
+
+  <h3>Films</h3>
+  <ul>
+    <% @films.each do |film| %>
+      <% film_id = film["url"].split("/").last %>
+      <li><%= link_to film["title"], film_path(film_id), data: { show_spinner: true, turbo: "false"  } %></li>
+    <% end %>
+  </ul>
 </div>

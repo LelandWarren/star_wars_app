@@ -5,5 +5,20 @@
   <p><strong>Director:</strong> <%= @film["director"] %></p>
   <p><strong>Producer:</strong> <%= @film["producer"] %></p>
   <p><strong>Release Date:</strong> <%= @film["release_date"] %></p>
-  <p><strong>Opening Crawl:</strong> <%= @film["opening_crawl"] %></p>
+
+  <h3>Characters</h3>
+  <ul>
+    <% @characters.each do |character| %>
+      <% character_id = character["url"].split("/").last %>
+      <li><%= link_to character["name"], person_path(character_id), data: { show_spinner: true, turbo: "false" } %></li>
+    <% end %>
+  </ul>
+
+  <h3>Vehicles</h3>
+  <ul>
+    <% @vehicles.each do |vehicle| %>
+      <% vehicle_id = vehicle["url"].split("/").last %>
+      <li><%= link_to vehicle["name"], vehicle_path(vehicle_id), data: { show_spinner: true, turbo: "false"  } %></li>
+    <% end %>
+  </ul>
 </div>
