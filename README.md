@@ -73,7 +73,7 @@ You should see `PONG`.
 First, clone this repository to your local machine:
 
 ```
-git clone https://github.com/yourusername/star_wars_app.git
+git clone https://github.com/LelandWarren/star_wars_app.git
 cd star_wars_app
 ```
 
